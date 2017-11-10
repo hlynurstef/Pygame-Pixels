@@ -24,13 +24,14 @@ class Screen(Bitmap):
     def render(self, game):
         """ Render images to the virtual screen. """
         # Clear the screen
-        self.pixels.fill(0)
+        #self.pixels.fill(0)
+
         x = int((self.width - 64) / 2)
         y = int((self.height - 64) / 2)
-        for i in range(0,100):
-            dx = int(math.sin((game.time+i)%2000/2000*math.pi*2)*100)
-            dy = int(math.cos((game.time+i)%2000/2000*math.pi*2)*60)
-            self.draw(self.testBitmap, x+dx, y+dy)
+        #for i in range(0,100):
+        dx = int(math.sin((game.time)%2000/2000*math.pi*2)*100)
+        dy = int(math.cos((game.time)%2000/2000*math.pi*2)*60)
+        self.draw(self.testBitmap, x+dx, y+dy)
         
 
         
