@@ -39,6 +39,7 @@ class Renderer():
             if self.time - lastTime > 1000:
                 pygame.display.set_caption('Pixels | FPS: ' + str(frames))
                 lastTime = lastTime + 1000
+                print('FPS:',frames)
                 frames = 0
 
 

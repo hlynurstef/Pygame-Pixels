@@ -6,7 +6,6 @@ class Game():
         self.time = 0
     
     def tick(self):
-        self.time = self.time + 1
         self.check_events()
 
     def check_events(self):
