@@ -1,0 +1,7 @@
+""" Settings """
+
+WIDTH = 160
+HEIGHT = 120
+SCALE = 4
+FPS = 60
+PANEL_HEIGHT = 8*3

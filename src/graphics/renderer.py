@@ -1,20 +1,17 @@
-import sys
+""" Handles all rendering to the actual screen """
 
 import pygame
-import numpy as N
 import pygame.surfarray as surfarray
 
-import settings as s
-from game import Game
-from screen import Screen
-from utils import scale
+from .. import settings as s
+from ..utils.utilities import scale
+
+from ..game.game import Game
+from ..graphics.screen import Screen
 
 class Renderer():
+    """ Renders to the screen """
     def  __init__(self, display):
-        self.WIDTH = 160
-        self.HEIGHT = 120
-        self.SCALE = 4
-        self.FPS = 60
         self.time = 0
         self.running = True
 
@@ -24,9 +21,10 @@ class Renderer():
         self.screen = Screen(s.WIDTH, s.HEIGHT)
 
     def run(self):
-        lastTime = 0
+        """ Runs the main render loop """
+        last_time = 0
 
-        dt = self.clock.tick(self.FPS)
+        dt = self.clock.tick(s.FPS)
         self.time = self.time + (dt/1000)
         frames = 0
         while self.running:
@@ -36,10 +34,10 @@ class Renderer():
 
             dt = self.clock.tick()
             self.time = self.time + dt
-            if self.time - lastTime > 1000:
+            if self.time - last_time > 1000:
                 pygame.display.set_caption('Pixels | FPS: ' + str(frames))
-                lastTime = lastTime + 1000
-                print('FPS:',frames)
+                last_time = last_time + 1000
+                #print('FPS:',frames)
                 frames = 0
 
 
@@ -55,15 +53,3 @@ class Renderer():
         scale(self.pixels, self.screen.pixels, s.SCALE)
 
         pygame.display.update()
-
-    
-
-def main():
-    pygame.init()
-    display = pygame.display.set_mode((s.WIDTH*s.SCALE, s.HEIGHT*s.SCALE))
-
-    Renderer(display).run()
-
-
-if __name__ == '__main__':
-    main()

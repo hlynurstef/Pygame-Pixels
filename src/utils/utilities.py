@@ -1,4 +1,4 @@
-""" Utilities module """
+""" Utilities """
 
 import time
 

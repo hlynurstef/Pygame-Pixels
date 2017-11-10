@@ -12,6 +12,11 @@ class Bitmap():
         self.height = height
         self.pixels = surfarray.pixels2d(Surface((width, height)))
 
+    def clear(self, color):
+        """ Clears the bitmap with a color """
+        self.pixels.fill(color.b ^ color.g << 8 ^ color.r << 16)
+
+
     def draw(self, bitmap, x_offs, y_offs):
         """
         Draw a new bitmap on top of this bitmap. A color value
@@ -56,8 +61,8 @@ class Bitmap():
             bitmap.pixels[
                 x_clip_start:x_len-x_clip_end,
                 y_clip_start:y_len-y_clip_end
-            ], 
-            where=bitmap.pixels[
+            ],
+               where=bitmap.pixels[
                 x_clip_start:x_len-x_clip_end,
                 y_clip_start:y_len-y_clip_end
-            ]>0)
+            ] > 0)
