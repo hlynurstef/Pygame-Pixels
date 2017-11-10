@@ -17,7 +17,6 @@ class Renderer():
         self.FPS = 60
         self.time = 0
         self.running = True
-        self.fps_list
 
         self.pixels = surfarray.pixels2d(display)
         self.clock = pygame.time.Clock()
@@ -40,7 +39,6 @@ class Renderer():
             if self.time - lastTime > 1000:
                 pygame.display.set_caption('Pixels | FPS: ' + str(frames))
                 lastTime = lastTime + 1000
-                self.game.add_frames(frames)
                 frames = 0
 
 
