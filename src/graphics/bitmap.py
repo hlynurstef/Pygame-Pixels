@@ -7,10 +7,13 @@ from numpy import copyto
 
 class Bitmap():
     """ Bitmap class that holds pixel color information """
-    def __init__(self, width, height):
+    def __init__(self, width, height, surface=None):
         self.width = width
         self.height = height
-        self.pixels = surfarray.pixels2d(Surface((width, height)))
+        if surface:
+            self.pixels = surfarray.pixels2d(surface)
+        else:
+            self.pixels = surfarray.pixels2d(Surface((width, height)))
 
     def clear(self, color):
         """ Clears the bitmap with a color """

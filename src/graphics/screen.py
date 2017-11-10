@@ -5,6 +5,7 @@ import math
 
 from .. import settings as s
 from .bitmap import Bitmap
+from .bitmap3d import Bitmap3D
 from .color import Color
 
 from ..utils.utilities import current_time_millis
@@ -19,14 +20,14 @@ class Screen(Bitmap):
         self.clear_color = Color(0, 0, 0)
         self.test_bitmap = Bitmap(64, 64)
         self.panel = Bitmap(width, s.PANEL_HEIGHT)
-        self.viewport = Bitmap(width, height-s.PANEL_HEIGHT)
+        self.viewport = Bitmap3D(width, height-s.PANEL_HEIGHT)
 
         for y in range(0, 64):
             for x in range(0, 64):
                 r = randrange(0, 256)
                 g = randrange(0, 256)
                 b = randrange(0, 256)
-                self.test_bitmap.pixels[x, y] = (b ^ g << 8 ^ r << 16) * randrange(0, 2)
+                self.test_bitmap.pixels[x, y] = (r << 16 | g << 8 | b) * randrange(0, 2)
 
 
     def render(self, game):
@@ -40,12 +41,15 @@ class Screen(Bitmap):
         dx = int(math.sin((current_time_millis())%2000/2000*math.pi*2)*100)
         #dy = int(math.cos((current_time_millis())%2000/2000*math.pi*2)*60)
         self.panel.draw(self.test_bitmap, x+dx, y)
-        self.draw(self.panel, 0, self.height-s.PANEL_HEIGHT)
+
+        self.viewport.render(game)
+        self.viewport.post_process()
         self.draw(self.viewport, 0, 0)
+        self.draw(self.panel, 0, self.height-s.PANEL_HEIGHT)
 
 
     def clear_screen(self, color):
         """ Clears the entire screen. """
         self.clear(color)
-        self.panel.clear(color)
+        #self.panel.clear(color)
         self.viewport.clear(color)
