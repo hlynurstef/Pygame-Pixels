@@ -1,6 +1,11 @@
 # Pygame-Pixels
 
-run with:
+## Install required modules:
+```
+pip install -r requirements.txt
+```
+
+## Run
 
 ```
 python main.py
